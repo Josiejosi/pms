@@ -4,52 +4,63 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Task ;
+use App\Models\User ;
+use App\Models\TaskNote ;
+use App\Models\ScoreUser ;
+
+use Charts;
+
+use Carbon\Carbon ;
+
 class AdminController extends Controller
 {
     public function index() {
-    	$events = [];
 
-		$events[] = \Calendar::event(
-		    'Over due', //event title
-		    false, //full day event?
-		    '2017-08-01T0800', //start time (you can also use Carbon instead of DateTime)
-		    '2017-08-01T0830', //end time (you can also use Carbon instead of DateTime)
-			3 //optionally, you can specify an event ID
-			,[
-        		'color' => '#b10',
-    		]
-		);	
+    	$month = date("m") ;
 
-		$events[] = \Calendar::event(
-		    'Event One', //event title
-		    false, //full day event?
-		    '2017-08-01T0800', //start time (you can also use Carbon instead of DateTime)
-		    '2017-08-01T0830', //end time (you can also use Carbon instead of DateTime)
-			1 //optionally, you can specify an event ID
-			,[
-        		'color' => '#b10',
-    		]
-		);
+    	$current_score = 0 ;
 
-		$events[] = \Calendar::event(
-		    'Event Two', //event title
-		    false, //full day event?
-		    '2017-08-01T0900', //start time (you can also use Carbon instead of DateTime)
-		    '2017-08-01T0930', //end time (you can also use Carbon instead of DateTime)
-			2 //optionally, you can specify an event ID
-		);
+    	if ( ScoreUser::where( "month", $month )->where( "user_id", auth()->user()->id )->count() == 1 ) {
+    		$score = ScoreUser::where( "month", $month )->where( "user_id", auth()->user()->id )->first() ;
 
-		$events[] = \Calendar::event(
-		    "Valentine's Day", //event title
-		    true, //full day event?
-		    new \DateTime('2017-08-24'), //start time (you can also use Carbon instead of DateTime)
-		    new \DateTime('2017-08-24'), //end time (you can also use Carbon instead of DateTime)
-			3 //optionally, you can specify an event ID
-		);
+    		$current_score = $score->score ;
+    	}
 
 
-		$calendar = \Calendar::addEvents($events) ;
+		$tasks = Task::whereAssignedTo( auth()->user()->id )->whereIsCompleted(0)->orderByDesc("id")->get() ;
 
-		return view('admin', compact('calendar'));
+		$tasks_completed = Task::whereAssignedTo( auth()->user()->id )->whereIsCompleted(1)->count() ;
+		$tasks_incompleted = Task::whereAssignedTo( auth()->user()->id )->whereIsCompleted(0)->count() ;
+
+		$tasks_totals = $tasks_completed + $tasks_incompleted ;
+
+		$events = [];
+
+		$i = 1 ;
+
+		foreach ( $tasks as $task ) {
+			$events[] = \Calendar::event(
+			    $task->name,
+			    true,
+			    Carbon::now(),
+			    Carbon::now(),
+				$i
+			);
+
+			$i++ ;
+		}
+
+		$calendar = \Calendar::addEvents( $events ) ;
+
+		$tasks_chart = Charts::create('percentage', 'justgage')
+			    ->title('Tasks Comparison')
+			    ->elementLabel('Completed')
+			    ->values( [ $tasks_completed, $tasks_incompleted, $tasks_totals ] )
+			    ->responsive(false)
+			    ->height(300)
+			    ->width(0);
+
+		return view('admin', compact( 'calendar', 'tasks', 'current_score', 'tasks_chart' ) );
     }
 }

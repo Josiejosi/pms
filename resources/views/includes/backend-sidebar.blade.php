@@ -7,16 +7,46 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
+                <li>
+                    <a href="{{ url( 'dashboard' ) }}">
                         <i class="fa fa-home"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="{{ url( 'users' ) }}">
+                        <i class="fa fa-users"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url( 'rewards' ) }}">
+                        <i class="fa fa-certificate"></i>
+                        <p>Rewards</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url( 'tasks' ) }}">
+                        <i class="fa fa-tasks"></i>
+                        <p>Tasks</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url( 'roles_and_permissions' ) }}">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <p>Roles</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url( 'reports' ) }}">
+                        <i class="fa fa-line-chart"></i>
+                        <p>Reports</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url( 'profile' ) }}">
                         <i class="fa fa-user"></i>
-                        <p>User Profile</p>
+                        <p>Profile</p>
                     </a>
                 </li>
             </ul>

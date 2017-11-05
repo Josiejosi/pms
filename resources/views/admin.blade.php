@@ -4,12 +4,31 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
+    {!! Charts::styles() !!}
+
 @endsection
 
 @section('content')
 
         <div class="content">
             <div class="container-fluid">
+
+                @include('flash::message')
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="card ">
+
+                            <div class="content">
+
+                                <center>
+                                    {!! $tasks_chart->html() !!}
+                                </center>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -27,11 +46,8 @@
                     <div class="col-md-6">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">Rank</h4>
-                                <p class="category">User Percentile</p>
-                            </div>
-                            <div class="content">
-
+                                <h2 class="title">{{ $current_score }} <small>Points</small></h2>
+                                <h4 class="category">Current Score</h4>
                             </div>
                         </div>
                     </div>
@@ -75,103 +91,26 @@
                                 <div class="table-full-width">
                                     <table class="table">
                                         <tbody>
+                                            @foreach( $tasks as $task )
                                             <tr>
                                                 <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
+                                                    <a 
+                                                        href="{{ url( 'task/complete/' ) }}/{{ $task->id }}" 
+                                                        class="btn btn-success btn-simple btn-sm">
+                                                        <i class="fa fa-check-square-o"></i>
+                                                    </a>
                                                 </td>
-                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                <td>{{ $task->name }}</td>
                                                 <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                    <a href="{{ url( 'task/note/' ) }}/{{ $task->id }}" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                    </a>
+                                                    <a href="{{ url( 'task/destroy/' ) }}/{{ $task->id }}" class="btn btn-danger btn-simple btn-sm">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Read "Following makes Medium better"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Unfollow 5 enemies from twitter</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -192,6 +131,10 @@
 @endsection
 
 @section('js')
+    
+
+    {!! Charts::scripts() !!}
+    {!! $tasks_chart->script() !!}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>

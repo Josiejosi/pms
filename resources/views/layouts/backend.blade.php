@@ -15,25 +15,27 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 
+    {!! Charts::styles() !!}
+
     @yield( 'css' )
 
 </head>
 <body>
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    @include ('includes.backend-sidebar')
-    <div class="main-panel">
-        
-        @include ('includes.backend-header')
+        @include ('includes.backend-sidebar')
+        <div class="main-panel">
+            
+            @include ('includes.backend-header')
 
-        @yield( 'content' )
+            @yield( 'content' )
 
 
-        @include ('includes.backend-footer')
+            @include ('includes.backend-footer')
 
+        </div>
     </div>
-</div>
 
 
 </body>
@@ -41,5 +43,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     @yield( 'js' )
+
 
 </html>

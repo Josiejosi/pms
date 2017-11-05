@@ -180,6 +180,11 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 
@@ -233,6 +238,8 @@ return [
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 

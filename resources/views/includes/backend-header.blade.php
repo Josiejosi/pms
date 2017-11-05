@@ -7,15 +7,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="{{ url( 'dashboard' ) }}">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
 
                     <ul class="nav navbar-nav navbar-right">
 
                         <li>
-                            <a href="#">
-                                <p>Log out</p>
+                            <a href="{{ url( 'logout' ) }}">
+                                <p><i class="fa fa-lock" aria-hidden="true"></i> Log out</p>
                             </a>
                         </li>
 						<li class="separator hidden-lg hidden-md"></li>
