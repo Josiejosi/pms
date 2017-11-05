@@ -24,13 +24,24 @@
 
                                     {!! csrf_field() !!}
                                     <div class="form-group">
-                                        <div class="col-sm-4">Email Address:</div>
+                                        <label for="role" class="col-sm-4 control-label">Email Address</label>
                                         <div class="col-sm-8">: {{ auth()->user()->email }}</div>
                                     </div>
                                      <div class="form-group">
-                                        <div class="col-sm-4">User Name:</div>
+                                        <label for="role" class="col-sm-4 control-label">User Name</label>
                                         <div class="col-sm-8">: {{ auth()->user()->name }}</div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="role" class="col-sm-4 control-label">Role:</label>
+                                        <div class="col-sm-8">
+                                            <select name="role" class="form-control" required="required">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-success">Assign</button>
                                 </form>
 
                             </div>

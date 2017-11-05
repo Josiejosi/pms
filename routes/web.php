@@ -22,7 +22,7 @@ Route::get('user/create', 'UserController@create');
 Route::post('user/store', 'UserController@store');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 Route::get('profile', 'UserController@profile');
-Route::get('user/role/{$id}', 'UserController@role');
+Route::get('user/role/{id}', 'UserController@role');
 Route::get('user/pdf', "UserController@pdf");
 
 Route::get('rewards', 'RewardController@index');
