@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\User ;
 
+use Spatie\Permission\Models\Role;
+
 use PDF;
 
 class UserController extends Controller
@@ -25,6 +27,9 @@ class UserController extends Controller
     		"email" => $request->email,
     		"password" => bcrypt( $request->password ) ,
     	]) ;
+
+        flash('New user successfully added.')->important() ;
+
     	return redirect( "users" ) ;
     }
 
@@ -32,11 +37,26 @@ class UserController extends Controller
 
     	( User::find($id) )->delete() ;
 
+        flash('User successfully removed from the system.')->important() ;
+
     	return redirect( "users" ) ;
     }
 
     public function role($id) {
-        return view( "users.role", [ "user" => User::find( $id ) ] ) ;
+        return view( "users.role", [ "user" => User::find( $id ), "roles" => Role::all() ] ) ;
+    }
+
+    public function store_role( Request $request ) {
+        //$user->assignRole('writer');
+
+        $user = User::find($request->user_id) ;
+        $role = Role::find($request->role) ;
+
+        $user->assignRole( $role->name ) ;
+
+        flash( $user->name . " was assigned a role of " . $role->name )->important() ;
+
+        return redirect()->back() ;
     }
 
     /**

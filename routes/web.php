@@ -1,15 +1,7 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +15,7 @@ Route::post('user/store', 'UserController@store');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 Route::get('profile', 'UserController@profile');
 Route::get('user/role/{id}', 'UserController@role');
+Route::post('user/role/store', 'UserController@store_role');
 Route::get('user/pdf', "UserController@pdf");
 
 Route::get('rewards', 'RewardController@index');
@@ -51,7 +44,36 @@ Route::post('permission/store', 'RolesController@permision');
 
 Auth::routes();
 
-Route::get('logout', function(){
+Route::get('logout', function() {
 	auth()->logout() ;
+	return redirect("/") ;
+});
+
+Route::get('manual_roles_and_permissions', function() {
+
+	$admin 			= Role::create(['name' => 'Admin']);
+	$management 	= Role::create(['name' => 'Management']);
+	$employee 		= Role::create(['name' => 'Employee']);
+
+	Permission::create(['name' => 'view dashboard']);
+	Permission::create(['name' => 'update profile']);
+	Permission::create(['name' => 'manage tasks']);
+	Permission::create(['name' => 'view report']);
+	Permission::create(['name' => 'manage users']);
+	Permission::create(['name' => 'manage rewards']);
+	Permission::create(['name' => 'manage permissions']);
+
+	$admin->givePermissionTo( 'view dashboard', 'manage users', 'manage permissions', 'update profile' ) ;
+	$management->givePermissionTo( 'view dashboard', 'view report', 'manage rewards', 'manage tasks', 'update profile' ) ;
+	$employee->givePermissionTo( 'view dashboard', 'update profile' ) ;
+
+    $user = \App\Models\User::create([
+    		"name" => "Promise",
+    		"email" => "admin@gmail.com",
+    		"password" => bcrypt( "Admin@123" ) ,
+    ]) ;
+
+    $user->assignRole( "Admin" ) ;
+
 	return redirect("/") ;
 });

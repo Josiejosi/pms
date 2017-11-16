@@ -43,18 +43,15 @@
                             <a href="#contact">Contact</a>
                         </li>
                         @if (Route::has('login'))
-                        @if (Auth::check())
-                        <li>
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-                        </li>
-                        @else
-                        <li>
-                            <a href="{{ url('/login') }}">Sign in</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/register') }}">Sign up</a>
-                        </li>
-                        @endif
+                            @if (Auth::check())
+                            <li>
+                                <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            </li>
+                            @else
+                            <li>
+                                <a href="{{ url('/login') }}">Sign in</a>
+                            </li>
+                            @endif
                         @endif
                     </ul>
                 </div>
