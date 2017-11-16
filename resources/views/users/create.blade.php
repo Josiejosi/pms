@@ -53,7 +53,7 @@
                                         <div class="col-sm-4">Password:</div>
                                         <div class="col-sm-8">
                                             <input 
-                                                type="text" 
+                                                type="password" 
                                                 name="password" 
                                                 class="form-control" 
                                                 value="" 
@@ -65,7 +65,7 @@
                                         <div class="col-sm-4">Confirm Password:</div>
                                         <div class="col-sm-8">
                                             <input 
-                                                type="text" 
+                                                type="password" 
                                                 name="password_confirmation" 
                                                 class="form-control" 
                                                 value="" 

@@ -51,7 +51,7 @@ Route::get('logout', function() {
 
 Route::get('manual_roles_and_permissions', function() {
 
-	$admin 			= Role::create(['name' => 'Admin']);
+/*	$admin 			= Role::create(['name' => 'Admin']);
 	$management 	= Role::create(['name' => 'Management']);
 	$employee 		= Role::create(['name' => 'Employee']);
 
@@ -65,7 +65,7 @@ Route::get('manual_roles_and_permissions', function() {
 
 	$admin->givePermissionTo( 'view dashboard', 'manage users', 'manage permissions', 'update profile' ) ;
 	$management->givePermissionTo( 'view dashboard', 'view report', 'manage rewards', 'manage tasks', 'update profile' ) ;
-	$employee->givePermissionTo( 'view dashboard', 'update profile' ) ;
+	$employee->givePermissionTo( 'view dashboard', 'update profile' ) ;*/
 
     $user = \App\Models\User::create([
     		"name" => "Promise",
