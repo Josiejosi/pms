@@ -56,6 +56,7 @@
                                                 type="text" 
                                                 name="password" 
                                                 class="form-control" 
+                                                autocomplete="false" 
                                                 value="" 
                                                 title="Password">
                                         </div>
@@ -68,6 +69,7 @@
                                                 name="password_confirmation" 
                                                 class="form-control" 
                                                 value="" 
+                                                autocomplete="false" 
                                                 title="Confirm Password">
                                         </div>
                                     </div>                               
