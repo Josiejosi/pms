@@ -66,6 +66,34 @@ class UserController extends Controller
         return view( "users.profile" ) ;
     } 
 
+    public function user_profile( Request $request ) {
+        $name = $request->name ;
+        $password = $request->password ;
+        $password_confirmation = $request->password_confirmation ;
+
+        if ( $name != "" || !isset( $name ) ) {
+            $user = User::find( auth()->user()->id ) ;
+
+            $user->update(["name"=>$name]) ;
+
+            flash( "Profile name was changed successfully." )->important() ;
+        }
+
+        if ( $password != "" || !isset( $password ) ) {
+
+            if ( $password == $password_confirmation ) {
+                $user = User::find( auth()->user()->id ) ;
+                $user->update( [ "password" => bcrypt( $password ) ] ) ;
+                flash( "Password was changed successfully." )->important() ;               
+            } else {
+                flash( "Please confirm your password." )->important() ;
+            }
+
+        }
+
+        return redirect()->back() ;
+    }
+
     public function pdf() {
         
         $pdf = PDF::loadView( 'pdf.users.index', [ "users" => User::orderByDesc("id")->get() ] ) ;

@@ -22,7 +22,7 @@
                             </div>
                             <div class="panel-body">
                                 
-                                <form action="{{ url( 'user/store' ) }}" method="POST" class="form-horizontal" role="form">
+                                <form action="{{ url( 'user/profile/store' ) }}" method="POST" class="form-horizontal" role="form">
 
                                     {!! csrf_field() !!}
                                     <div class="form-group">
