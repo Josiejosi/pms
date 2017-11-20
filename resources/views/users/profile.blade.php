@@ -57,7 +57,6 @@
                                                 name="password" 
                                                 class="form-control" 
                                                 value="" 
-                                                required="required"
                                                 title="Password">
                                         </div>
                                     </div>
@@ -69,7 +68,6 @@
                                                 name="password_confirmation" 
                                                 class="form-control" 
                                                 value="" 
-                                                required="required"
                                                 title="Confirm Password">
                                         </div>
                                     </div>                               
