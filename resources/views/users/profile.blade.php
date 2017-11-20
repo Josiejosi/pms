@@ -54,7 +54,7 @@
                                         <div class="col-sm-4">Password:</div>
                                         <div class="col-sm-8">
                                             <input 
-                                                type="text" 
+                                                type="password" 
                                                 name="password" 
                                                 class="form-control" 
                                                 autocomplete="false" 
