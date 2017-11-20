@@ -32,6 +32,7 @@
                                                 type="email" 
                                                 name="email" 
                                                 readonly="true" 
+                                                value="{{ auth()->user()->email }}" 
                                                 class="form-control" 
                                                 value="" 
                                                 title="Email Address">
@@ -65,7 +66,7 @@
                                         <div class="col-sm-4">Confirm Password:</div>
                                         <div class="col-sm-8">
                                             <input 
-                                                type="text" 
+                                                type="password" 
                                                 name="password_confirmation" 
                                                 class="form-control" 
                                                 value="" 

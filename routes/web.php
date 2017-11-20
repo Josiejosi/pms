@@ -17,7 +17,7 @@ Route::get('profile', 'UserController@profile');
 Route::get('user/role/{id}', 'UserController@role');
 Route::post('user/role/store', 'UserController@store_role');
 Route::get('user/pdf', "UserController@pdf");
-Route::get('user/profile/store', "UserController@user_profile");
+Route::post('user/profile/store', "UserController@user_profile");
 
 Route::get('rewards', 'RewardController@index');
 Route::get('reward/create', 'RewardController@create');
